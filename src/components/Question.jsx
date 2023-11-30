@@ -7,7 +7,7 @@ function Question(props) {
   return (
     <div>
       <h4>{props.question.question}</h4>
-      <Options questions={props.question.options} />
+      <Options questions={props.question} dispatch={props.dispatch} answer={props.answer} />
     </div>
   )
 }
