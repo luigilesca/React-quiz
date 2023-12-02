@@ -1,7 +1,6 @@
 import React from 'react';
 
 function Options(props) {
-  console.log(props)
 
   const hasAnswered = props.answer !== null;
 

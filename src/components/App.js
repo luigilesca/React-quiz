@@ -9,6 +9,7 @@ import Start from '../components/Start';
 import Question from '../components/Question';
 import NextButton from './NextButton';
 import Progress from './Progress';
+import FinishScreen from './FinishScreen';
 
 const initialState = {
   questions: [],
@@ -17,7 +18,8 @@ const initialState = {
   status: "Loading...",
   index: 0,
   answer: null,
-  points: 0
+  points: 0,
+  highScore: 0
 };
 
 function reducer(state, action) {
@@ -53,6 +55,13 @@ function reducer(state, action) {
         ...state,
         answer: null,
         index: state.index + 1
+      }
+    }
+    case "finish": {
+      return {
+        ...state,
+        status: "finished",
+        highScore: state.points > state.highScore ? state.points : state.highScore
       }
     }
     default: {
@@ -104,9 +113,15 @@ function App() {
             question={state.questions[state.index]}
             dispatch={dispatch}
             answer={state.answer} />
-          <NextButton dispatch={dispatch} answer={state.answer} />
+          <NextButton dispatch={dispatch} answer={state.answer} numQuestions={numQuestions} index={state.index} />
         </>
       )}
+
+        {state.status === "finished" &&
+          <FinishScreen
+            points={state.points}
+            maxPossiblePoints={maxPossiblePoints}
+            highScore={state.highScore} />}
       </Main>
 
     </div>
