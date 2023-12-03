@@ -19,6 +19,10 @@ function FinishScreen(props) {
       <p className='highscore'>
         (Highscore: {props.highScore} points)
       </p>
+
+      <button className='btn btn-ui' onClick={() => props.dispatch({ type: "restart" })}>
+        Restart Quiz
+      </button>
     </>
   )
 }
